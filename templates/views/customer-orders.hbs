@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+    <html>
+            <head>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+            <link rel="stylesheet" href="/css/style.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            </head>
+            <title>Inventory Management</title>
+            <body>
+                
+         <div class="main-content">
+             {{>header}}<br>
+             <nav class="nav nav-pills nav-fill">
+                <a class="nav-link active" aria-current="page" href="#">Orders</a>
+                <a class="nav-link" href="/product">Inventory</a>
+                <a class="nav-link" href="/">Home</a>
+                </nav><br>
+                    <form action="/order" method="POST">
+                    Customer: <input type="text" name="customer_name" required><br><br>
+                Product: <select id="dd" name="product" class="select" required>
+                   <option value="">Select Product</option>
+                    {{# each productname}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+             <br><br>
+                Quantity:  <input type="text" name="quantity_requested" required><br><br>
+                    <input type="submit" class="btn btn-secondary" value="Add" >
+                </form>
+               </div>
+                <br><br>
+
+                    <div class="table-content">   
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Quantity Requested</th>
+                        <th>Status</th>
+                    </tr>   
+                </thead>
+                <tbody></tbody>
+                        {{# each custorders}}
+                    <tr>
+                        <td>{{this.customer_name}}</td>
+                        <td>{{this.product}}</td>
+                        <td>{{this.quantity_requested}}</td>
+                        <td>{{this.status}}</td>
+                        <td><a  href="/order/cancel/{{this._id}}" onclick="return confirm('Are you sure you want to cancel this order?');" >CANCEL ORDER</a></td>   
+                 </tr>    
+                    {{/each}}
+                </tbody>   
+            </table>
+        </div>
+            </body> 
+    </html>

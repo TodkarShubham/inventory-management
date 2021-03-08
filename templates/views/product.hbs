@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <html>
+            <head>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+            <link rel="stylesheet" href="/css/style.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <title>Inventory Management</title>
+            </head>
+
+            <body>
+                
+                <div class="main-content">
+             {{>header}}<br>
+             <nav class="nav nav-pills nav-fill">
+                <a class="nav-link active" aria-current="page" href="#">Inventory</a>
+                <a class="nav-link" href="/order">Orders</a>
+                <a class="nav-link" href="/">Home</a>             
+                </nav><br>
+
+                <form action="/product" method="POST">
+                Product:          <input type="text" name="product" required><br><br>
+                In-Stock: <input type="text" name="instock" required><br><br>
+                Warehouse: <input type="text" name="warehouse" required><br><br>
+                <input type="submit" class="btn btn-secondary" value="Add">
+                </form>
+                </div>
+                <br><br>
+
+                <div class="table-content">   
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>Product</th>
+                        <th>In Stock</th>
+                        <th>Warehouse</th>
+                    </tr>   
+                </thead>
+                <tbody></tbody>
+                        {{# each inventory}}
+                    <tr>
+                        <td>{{this.product}}</td>
+                        <td>{{this.instock}}</td>
+                        <td>{{this.warehouse}}</td>
+                    </tr>    
+                    {{/each}}
+                </tbody>   
+            </table>
+        </div>
+
+            </body> 
+    </html>
